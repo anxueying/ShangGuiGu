@@ -394,11 +394,11 @@ s += 1; //s = (short)(s + 1)编译？YES
 
 # 第三章 Java 基础语法2
 
-## 流程控制
+## 一、流程控制
 
-### 顺序结构
+### 1. 顺序结构
 
-### 分支结构
+### 2. 分支结构
 
 #### if条件判断
 
@@ -480,7 +480,7 @@ switch(表达式){
   - 对区间判断，结果为boolean类型判断，使用if
   - 凡是if均可转换为switch..case，反之不行
 
-### 循环结构
+### 3. 循环结构
 
 ① 循环条件
 
@@ -529,4 +529,126 @@ do{
 
 #### 5. 嵌套循环
 
-将一个循环放在另一个循环内，形成外层、内层循环。
+一个循环充当另一个循环的循环体，形成外层、内层循环。
+
+```java
+//打印1-100以内的质数
+class PrimeNum{
+	public static void main(String[] args){
+		for(int i =2;i<=100;i++){
+			boolean flag = true;
+			for(int j=2;j<i;j++){
+				//如可以被整除，则肯定不是
+				if(i%j==0){
+					flag = false;
+				}
+			}
+			//如果flag是true则说明没进入if
+			if(flag){
+				System.out.println(i);
+			}
+		}
+	}
+}
+```
+
+## 二、特殊流程控制语句
+
+都支持label，但不推荐，可读性较差
+
+- break  结束当前循环(跳出循环）
+  - 结束label
+  - 支持结束label代码块
+  - 可用于 switch-case，用于结束当前 switch-case
+- continue  结束当次循环（跳出本次循环，进入下次循环）
+  - 进入label循环
+  - 不支持代码块
+
+# 第四章 声明和使用方法
+
+## 一、方法的声明和调用
+
+方法，也叫函数。是一个功能的定义，是一个类中最基本的功能单位。
+
+### 格式：
+
+```java
+修饰符 返回值类型 方法名(参数列表){
+    //需要定义的功能语句
+    return 返回值;
+}
+```
+
+### 明确：
+
+- 是否需要返回结果给调用者？
+  - int、double等定义类型：必有return
+  - void：无返回值，无return
+- 是否有未知数值参与运算？
+  - 参数列表
+    - 参数类型
+    - 参数个数
+
+### 调用
+
+方法名+参数列表，与声明必须一致
+
+```java
+public static void add(int a, int b){
+    //需要定义的功能语句
+    return a*b;
+}
+
+//调用语句
+add(1,2);
+```
+
+### 跨类调用
+
+`类名.方法名`
+
+## 二、参数的值传递
+
+### 1. 基本数据类型
+
+```java
+class ParaValueTrans{
+	public static void main(String[] args){
+		int a=1,b=2;
+		System.out.println("main前：a="+a+"，b="+b);
+		add(a,b);
+		System.out.println("main后：a="+a+"，b="+b);
+	}
+	
+	public static void add(int i,int j){
+		System.out.println("add前：i="+i+"，j="+j);
+		i += 1;
+		j += 2;
+		System.out.println("add后：i="+i+"，j="+j);
+	}
+}
+```
+
+结果为：
+
+```java
+main前：a=1，b=2
+add前：i=1，j=2
+add后：i=2，j=4
+main后：a=1，b=2
+```
+
+![1587984555085](E:\ShangGuiGu\ShangGuiGu\学习内容\img\1587984555085.png)
+
+### 2. 引用数据类型 
+
+## 三、重载方法（overload）
+
+目的：方便调用
+
+在同一个类中
+
+1. 方法名相同
+2. 参数列表不同（参数个数、参数类型）
+
+注意：与返回值无关
