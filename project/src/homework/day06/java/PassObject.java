@@ -13,7 +13,11 @@ public class PassObject {
             c.setRadius(i);
             result += (double)i + "\t\t" + c.findArea()+"\n";
         }
+
         System.out.println(result);
+        
+        c.setRadius(times+1);
+        System.out.println("now radius is: " + c.getRadius());
     }
 }
 
@@ -37,6 +41,6 @@ class Circle{
     }
 
     public double findArea(){
-        return 3.14*this.radius*this.radius;
+        return Math.PI*this.radius*this.radius;
     }
 }
